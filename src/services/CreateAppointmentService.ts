@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { startOfHour } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
 
@@ -12,12 +13,12 @@ import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
 // request próprio / simula o request
 interface Request {
-  provider: string;
+  provider_id: string;
   date: Date;
 }
 
 class CreateAppointmentService {
-  public async execute({ provider, date }: Request): Promise<Appointment> {
+  public async execute({ provider_id, date }: Request): Promise<Appointment> {
     // possui todos os métodos de execução (find, create, etc)
     const appointmentsRepository = getCustomRepository(AppointmentsRepository);
 
@@ -35,7 +36,7 @@ class CreateAppointmentService {
 
     // create é um método ja presente no typeorm | não criado por mim
     const appointment = appointmentsRepository.create({
-      provider,
+      provider_id,
       date: appointmentDate,
     });
 
