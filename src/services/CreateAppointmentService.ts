@@ -2,6 +2,8 @@
 import { startOfHour } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
 
+import AppError from '../errors/AppError';
+
 import Appointment from '../models/Appointment';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
@@ -31,7 +33,7 @@ class CreateAppointmentService {
 
     // se existe && erro
     if (findAppointmentInSameDate) {
-      throw Error('This appointment already booked');
+      throw new AppError('This appointment already booked', 400);
     }
 
     // create é um método ja presente no typeorm | não criado por mim
